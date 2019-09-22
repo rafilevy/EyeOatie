@@ -1,0 +1,15 @@
+{
+  "name": "EyeOatie",
+  "keywords": "IOT EyeOatie mesh home automation",
+  "description": "ESP library for creation of IOT devices.",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/rafilevy/EyeOatie.git"
+  },
+  "version": "1.0.0",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/rafilevy/EyeOatie.git"
+}
