@@ -36,16 +36,15 @@ void EyeOatieNode::receivedCallback(uint32_t from, String& message) {
         serializeJson(dataResponseDocument, msg);
         mesh.sendSingle(from, msg);
     } else if (meshRequest["type"] == "actionRequest") {
-        int noParams = meshRequest["params"].size();
-        if (noParams == 0) {
-            performAction(meshRequest["name"], {});
-        }
-        else {
+        if (meshRequest.containsKey("params")) {
+            int noParams = meshRequest["params"].size();
             String params[noParams];
             for (int i = 0; i < noParams; i++) {
-                params[i] = meshRequest["params"][i].as<String>();
+               params[i] = meshRequest["params"][i].as<String>();
             }
-            performAction(meshRequest["name"], params);
+        performAction(meshRequest["name"], params);
+        } else {
+            performAction(meshRequest["name"], {});
         }
     }
 }
