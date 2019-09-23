@@ -1,0 +1,23 @@
+/Users/rafilevy/Arduino/libraries/EyeOatie/build/core/WMath.cpp.o: \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/WMath.cpp \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/stdlib.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/ieeefp.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/newlib.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/config.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/features.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/xtensa/config/core-isa.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/reent.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/_types.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/_types.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/_default_types.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/lock.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/cdefs.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/stdlib.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/alloca.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/esp8266_peri.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include/c_types.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/stdint.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/_intsup.h \
+ /Users/rafilevy/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/esp8266_undocumented.h
