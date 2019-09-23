@@ -116,7 +116,7 @@ String EyeOatieNode::getNodeInfo() {
 
     JsonArray actions = nodeInfo.createNestedArray("actions");
     for (int i = 0; i < actionArraysHead; i++) {
-        JsonObject actionObject = data.createNestedObject();
+        JsonObject actionObject = actions.createNestedObject();
         actionObject["name"] = actionNameArray[i];
         JsonArray params = actionObject.createNestedArray("params");
         for (int j = 0; j < actionParamNumbers[i]; j++) {
