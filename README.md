@@ -70,6 +70,18 @@ Registers an action on the node.
 * **std::function<void()> getData**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
 
 ```c++
+void EyeOatieNode::addAction(String name, std::function<void(String[])> actionCallback, String paramNames[], String paramTypes[], int noParams)
+```
+
+Registers an action on the node.
+
+* **String name**: The name of the action. This must be unique on the device.
+* **std::function<void(String[])> getData**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
+* **String paramNames[]** An array containing the names of the parameters for the callback.
+* **String paramTypes[]** An array containing the types of the parameters for the callbacks in parrallel with the paramNames array.
+* **int noParams** The number of parameters for the callback
+
+```c++
 void EyeOatieNode::update()
 ```
 

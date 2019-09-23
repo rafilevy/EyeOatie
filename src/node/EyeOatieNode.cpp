@@ -36,7 +36,17 @@ void EyeOatieNode::receivedCallback(uint32_t from, String& message) {
         serializeJson(dataResponseDocument, msg);
         mesh.sendSingle(from, msg);
     } else if (meshRequest["type"] == "actionRequest") {
-        performAction(meshRequest["name"]);
+        int noParams = meshRequest["params"].size();
+        if (noParams == 0) {
+            performAction(meshRequest["name"], {});
+        }
+        else {
+            String params[noParams];
+            for (int i = 0; i < noParams; i++) {
+                params[i] = meshRequest["params"][i].as<String>();
+            }
+            performAction(meshRequest["name"], params);
+        }
     }
 }
 
@@ -67,13 +77,27 @@ String EyeOatieNode::getDataType(String name) {
 
 void EyeOatieNode::addAction(String name, std::function<void()> actionCallback) {
     actionNameArray[actionArraysHead] = name;
-    actionCallbackArray[actionArraysHead] = actionCallback;
+    String emptyStringArray[] = {};
+    std::function<void(String[])> boundCallback = [&](String[]) { actionCallback(); };
+    actionCallbackArray[actionArraysHead] = boundCallback;
+    actionParamNumbers[actionArraysHead] = 0;
     actionArraysHead++;
 }
 
-void EyeOatieNode::performAction(String name) {
+void EyeOatieNode::addAction(String name, std::function<void(String[])> actionCallback, String paramNames[], String paramTypes[], int noParams) {
+    actionNameArray[actionArraysHead] = name;
+    actionCallbackArray[actionArraysHead] = actionCallback;
+    actionParamNumbers[actionArraysHead] = noParams;
+    for (int i = 0; i < noParams; i++) {
+        actionParamsNameArray[actionArraysHead][i] = paramNames[i];
+        actionParamsTypeArray[actionArraysHead][i] = paramTypes[i];
+    }
+    actionArraysHead++;
+}
+
+void EyeOatieNode::performAction(String name, String params[]) {
     for (int i = 0; i < actionArraysHead; i++) {
-        if (actionNameArray[i].equals(name)) (actionCallbackArray[i])();
+        if (actionNameArray[i].equals(name)) (actionCallbackArray[i])(params);
     }
 }
 
@@ -95,6 +119,12 @@ String EyeOatieNode::getNodeInfo() {
     for (int i = 0; i < actionArraysHead; i++) {
         JsonObject actionObject = data.createNestedObject();
         actionObject["name"] = actionNameArray[i];
+        JsonArray params = actionObject.createNestedArray("params");
+        for (int j = 0; j < actionParamNumbers[i]; j++) {
+            JsonObject paramObject = params.createNestedObject();
+            paramObject["data"] = actionParamsNameArray[i][j];
+            paramObject["type"] = actionParamsTypeArray[i][j];
+        }
     }
 
     String str;

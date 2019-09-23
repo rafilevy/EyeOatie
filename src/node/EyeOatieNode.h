@@ -10,6 +10,7 @@ class EyeOatieNode {
 
         void addData(String name, String type, std::function<String()> getData);
         void addAction(String name, std::function<void()> actionCallback);
+        void addAction(String name, std::function<void(String[])> actionCallback, String paramNames[], String paramTypes[], int noParams);
 
         void update();
     private:
@@ -29,9 +30,12 @@ class EyeOatieNode {
         String getDataType(String name);
 
         String actionNameArray[10];
-        std::function<void()> actionCallbackArray[10];
+        String actionParamsNameArray[10][5];
+        String actionParamsTypeArray[10][5];
+        std::function<void(String[])> actionCallbackArray[10];
         int actionArraysHead;
-        void performAction(String name);
+        int actionParamNumbers[10];
+        void performAction(String name, String params[]);
 };
 
 #endif
