@@ -21,28 +21,29 @@ void EyeOatieNode::receivedCallback(uint32_t from, String& message) {
         return;
     }
 
-    if (meshRequest["type"] == "nodeInfoRequest") {
+    if (meshRequest["requestType"] == "nodeInfoRequest") {
         mesh.sendSingle(from, getNodeInfo());
-    } else if (meshRequest["type"] == "getDataRequest") {
+    } else if (meshRequest["requestType"] == "getDataRequest") {
         String data = getData(meshRequest["name"]);
         String type = getDataType(meshRequest["name"]);
         DynamicJsonDocument dataResponseDocument(512);
         JsonObject dataResponse = dataResponseDocument.to<JsonObject>();
+        dataResponse["requestType"] = "getDataResponse";
         dataResponse["nodeId"] = nodeId;
         dataResponse["name"] = meshRequest["data"];
-        dataResponse["data"] = data;
+        dataResponse["value"] = data;
         dataResponse["type"] = type;
         String msg;
         serializeJson(dataResponseDocument, msg);
         mesh.sendSingle(from, msg);
-    } else if (meshRequest["type"] == "actionRequest") {
+    } else if (meshRequest["requestType"] == "actionRequest") {
         if (meshRequest.containsKey("params")) {
             int noParams = meshRequest["params"].size();
             String params[noParams];
             for (int i = 0; i < noParams; i++) {
                params[i] = meshRequest["params"][i].as<String>();
             }
-        performAction(meshRequest["name"], params);
+            performAction(meshRequest["name"], params);
         } else {
             performAction(meshRequest["name"], {});
         }
@@ -104,6 +105,7 @@ String EyeOatieNode::getNodeInfo() {
     DynamicJsonDocument doc(1024);
     JsonObject nodeInfo = doc.to<JsonObject>();
 
+    nodeInfo["requestType"] = "nodeInfoResponse";
     nodeInfo["name"] = nodeName;
     nodeInfo["nodeId"] = nodeId;
 
@@ -112,6 +114,7 @@ String EyeOatieNode::getNodeInfo() {
         JsonObject dataObject = data.createNestedObject();
         dataObject["name"] = dataNameArray[i];
         dataObject["type"] = dataTypeArray[i];
+        dataObject["value"] = getData(dataNameArray[i]);
     }
 
     JsonArray actions = nodeInfo.createNestedArray("actions");
@@ -121,7 +124,7 @@ String EyeOatieNode::getNodeInfo() {
         JsonArray params = actionObject.createNestedArray("params");
         for (int j = 0; j < actionParamNumbers[i]; j++) {
             JsonObject paramObject = params.createNestedObject();
-            paramObject["data"] = actionParamsNameArray[i][j];
+            paramObject["name"] = actionParamsNameArray[i][j];
             paramObject["type"] = actionParamsTypeArray[i][j];
         }
     }
