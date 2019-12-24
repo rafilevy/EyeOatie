@@ -20,8 +20,12 @@ void EyeOatieSerialBridge::update() {
             DynamicJsonDocument serialRequest(512);
             DeserializationError error = deserializeJson(serialRequest, input);
             if (error) return;
-            uint32_t recipient = serialRequest["nodeId"];
-            mesh.sendSingle(recipient, input);
+            if (serialRequest.containsKey("nodeId")) {
+                uint32_t recipient = serialRequest["nodeId"];
+                mesh.sendSingle(recipient, input);
+            } else {
+                if (serialRequest["requestType"] = "nodeInfoRequest") mesh.sendBroadcast(input);
+            }
         }
     }
 }
