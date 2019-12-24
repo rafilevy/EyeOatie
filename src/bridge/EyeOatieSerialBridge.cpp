@@ -3,6 +3,7 @@
 EyeOatieSerialBridge::EyeOatieSerialBridge(String meshSsid = "EyeOatieMesh", String meshPassword= "def@ultMeshPa$$12") {
     mesh.setDebugMsgTypes(ERROR | STARTUP);
     mesh.init(meshSsid, meshPassword, &scheduler);
+    Serial.println();
 
     using namespace std::placeholders;
     std::function<void(uint32_t, String&)> boundOnReceive = std::bind(&EyeOatieSerialBridge::receivedCallback, this, _1, _2);
@@ -31,14 +32,14 @@ void EyeOatieSerialBridge::update() {
 }
 
 void EyeOatieSerialBridge::receivedCallback(uint32_t from, String& message) {
-    Serial.print(message);
+    Serial.println(message);
 }
 
 void EyeOatieSerialBridge::newConnectionCallback(uint32_t from) {
     DynamicJsonDocument doc(64);
     JsonObject meshMessage = doc.to<JsonObject>();
 
-    meshMessage["type"] = "nodeInfoRequest";
+    meshMessage["requestType"] = "nodeInfoRequest";
     String str;
 
     serializeJson(meshMessage, str);
