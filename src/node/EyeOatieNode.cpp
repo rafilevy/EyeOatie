@@ -45,7 +45,8 @@ void EyeOatieNode::receivedCallback(uint32_t from, String& message) {
             }
             performAction(meshRequest["name"], params);
         } else {
-            performAction(meshRequest["name"], {});
+            String params[0];
+            performAction(meshRequest["name"], params);
         }
     }
 }
@@ -54,7 +55,7 @@ void EyeOatieNode::update() {
     mesh.update();
 }
 
-void EyeOatieNode::addData(String name, String type, std::function<String()> getData) {
+void EyeOatieNode::addData(String name, String type, DataFuncPtr getData) {
     dataNameArray[dataArraysHead] = name;
     dataTypeArray[dataArraysHead] = type;
     dataGetterArray[dataArraysHead] = getData;
@@ -75,16 +76,15 @@ String EyeOatieNode::getDataType(String name) {
     return "";
 }
 
-void EyeOatieNode::addAction(String name, std::function<void()> actionCallback) {
+void EyeOatieNode::addAction(String name, ActionFuncPtr actionCallback) {
     actionNameArray[actionArraysHead] = name;
     String emptyStringArray[] = {};
-    std::function<void(String[])> boundCallback = [&](String[]) { actionCallback(); };
-    actionCallbackArray[actionArraysHead] = boundCallback;
+    actionCallbackArray[actionArraysHead] = actionCallbackArray;
     actionParamNumbers[actionArraysHead] = 0;
     actionArraysHead++;
 }
 
-void EyeOatieNode::addAction(String name, std::function<void(String[])> actionCallback, String paramNames[], String paramTypes[], int noParams) {
+void EyeOatieNode::addAction(String name, ActionFuncPtr actionCallback, String paramNames[], String paramTypes[], int noParams) {
     actionNameArray[actionArraysHead] = name;
     actionCallbackArray[actionArraysHead] = actionCallback;
     actionParamNumbers[actionArraysHead] = noParams;

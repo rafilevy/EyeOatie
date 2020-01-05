@@ -36,11 +36,24 @@ ___
 
 ## Docs
 
+### Function pointer types
+
+There are two types representing pointers to functions which get data or perform an action on the device.
+
+```c
+typedef String (*DataFuncPtr)();
+typedef void (*ActionFuncPtr)(String[]);
+```
+
+* **DataFuncPtr**: A pointer to a function which gets data for the device. Takes no arguments and returns a String.
+
+* **ActionFuncPtr**: A pointer to a function which performs an action for the device. Takes a String array as an argument and returns nothing.
+
 ### EyeOatieNode
 
 EyeOatieNode is the main node class.
 
-```c++
+```c
 EyeOatieNode::EyeOatieNode(String name, String meshSsid, String meshPassword)
 ```
 
@@ -51,32 +64,32 @@ The constructor for node devices. Returns an EyeOatieNode object.
 * **String meshPassword**: The password to the mesh network. Has a default value but it is reccomended this is changed so the network cannot be externally accessed.
 
 ```c++
-void EyeOatieNode::addData(String name, String type, std::function<String()> getData)
+void EyeOatieNode::addData(String name, String type, DataFuncPtr getData)
 ```
 
 Registers a piece of data on the node.
 
 * **String name**: The name of the data. This must be unique on the device.
 * **String type**: The type of the data, used for conversion by the server.
-* **std::function<String()> getData**: a function which returns the piece of data converted to a String. e.g. a function which reads data from a sensor attached to the device.
+* **DataFuncPtr getData**: A pointer to a function which gets the data required.
 
 ```c++
-void EyeOatieNode::addAction(String name, std::function<void()> actionCallback)
+void EyeOatieNode::addAction(String name, ActionFuncPtr actionCallback)
 ```
 
 Registers an action on the node.
 
 * **String name**: The name of the action. This must be unique on the device.
-* **std::function<void()> getData**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
+* **ActionFuncPtr actionCallback**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
 
 ```c++
-void EyeOatieNode::addAction(String name, std::function<void(String[])> actionCallback, String paramNames[], String paramTypes[], int noParams)
+void EyeOatieNode::addAction(String name, ActionFuncPtr actionCallback, String paramNames[], String paramTypes[], int noParams)
 ```
 
 Registers an action on the node.
 
 * **String name**: The name of the action. This must be unique on the device.
-* **std::function<void(String[])> getData**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
+* **ActionFuncPtr getData**: The function to be run when the action is executed. e.g. a function which digitalWrites to a pin on the device.
 * **String paramNames[]** An array containing the names of the parameters for the callback.
 * **String paramTypes[]** An array containing the types of the parameters for the callbacks in parrallel with the paramNames array.
 * **int noParams** The number of parameters for the callback
