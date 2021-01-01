@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <painlessMesh.h>
 
-#include "node/EyeOatieNode.h"
-#include "bridge/EyeOatieSerialBridge.h"
+#include "EyeOatieNode/EyeOatieNode.hpp"
+#include "EyeOatieSerialBridge/EyeOatieSerialBridge.hpp"
 
 #endif

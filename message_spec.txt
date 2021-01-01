@@ -1,0 +1,45 @@
+{
+    "type" : int (Message type)
+        0 -> nodeInfoRequest
+        1 -> nodeInfoResponse
+        2 -> functionRequest
+        3 -> functionResponse
+        4 -> newConnection
+
+    "from" : int (id of the node the message was sent from)
+    "to"   : int (id of the node the message was sent to  )
+
+    "request_id" : int (id of the request and resposne pair)
+}
+
+For "type" : 1
+{
+    "functions" : [
+        {
+            "name" : string (the name of the function)
+            "data" : bool   (a flag indicating if the function is a data function (no side effects))
+            "args" : [
+                {
+                    "name"  : string (the name of the argument) 
+                    "value" : any    (the default value of the argument)
+                }
+            ]
+        }
+    ]
+}
+
+For "type" : 2
+{
+    "function": string  (the name of the function to be called)
+    "args": [
+        {
+            "name"  : string (the name of the argument) 
+            "value" : any    (the value of this argument)
+        }
+    ]
+}
+
+For "type" : 3
+{
+    "value" : any (The return value of calling the function)
+}
